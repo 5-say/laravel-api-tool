@@ -1,0 +1,15 @@
+{
+    "name": "five-say/laravel-api-tool",
+    "description": "self-use laravel api tool",
+    "type": "library",
+    "authors": [
+        {
+            "name": "5say",
+            "email": "bcw.5@foxmail.com"
+        }
+    ],
+    "require": {
+        "five-say/laravel-model-ext-trait": "^1.0",
+        "tymon/jwt-auth": "0.5.*"
+    }
+}
