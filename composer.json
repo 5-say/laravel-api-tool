@@ -19,7 +19,7 @@
             "Ext\\": "../../../ext/"
         },
         "files": [
-            "src/helpers.php"
+            "src/changeCoreHelpers.php"
         ]
     }
 }
