@@ -1,6 +1,6 @@
 <?php
 
-namespace FiveSay\Laravel\Class;
+namespace Ext\Core;
 
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
