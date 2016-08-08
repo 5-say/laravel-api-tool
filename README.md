@@ -5,3 +5,7 @@
 ```
 php artisan vendor:publish --provider="FiveSay\Laravel\Api\ServiceProvider"
 ```
+
+```
+php artisan vendor:publish --provider="FiveSay\Laravel\Api\ServiceProvider" --tag="config"
+```
