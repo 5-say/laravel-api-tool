@@ -212,7 +212,7 @@ if (! function_exists('response')) {
      */
     function response($content = '', $status = 200, array $headers = [])
     {
-        $factory = app(Ext\Class\Response::class);
+        $factory = app(Ext\Core\Response::class);
 
         if (func_num_args() === 0) {
             return $factory;
