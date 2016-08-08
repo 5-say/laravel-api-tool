@@ -9,7 +9,17 @@
         }
     ],
     "require": {
+        "illuminate/support": "5.1.*|5.2.*|5.3.*",
         "five-say/laravel-model-ext-trait": "^1.0",
         "tymon/jwt-auth": "0.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FiveSay\\Laravel\\Api\\": "src/",
+            "Ext\\": "../../../ext/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }
