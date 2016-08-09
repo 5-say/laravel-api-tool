@@ -16,7 +16,7 @@ class AccessControlAllowOrigin
     public function handle($request, Closure $next)
     {
         $clientOrigin = $request->header('host');
-        $allowOrigin  = config('allowClientOrigin');
+        $allowOrigin  = config('ext.allowClientOrigin');
 
         if (in_array($clientOrigin, $allowOrigin)) {
             $response = $next($request);
