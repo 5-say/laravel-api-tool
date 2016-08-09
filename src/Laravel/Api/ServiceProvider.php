@@ -22,12 +22,12 @@ class ServiceProvider extends BaseServiceProvider
     {
         // 发布配置文件
         $this->publishes([
-            __DIR__.'/../config/ext.php' => config_path('ext.php'),
+            __DIR__.'/../../../config/ext.php' => config_path('ext.php'),
         ], 'config');
 
         // 发布可编辑扩展目录
         $this->publishes([
-            __DIR__.'/../ext' => base_path('ext'),
+            __DIR__.'/../../../ext' => base_path('ext'),
         ], 'ext');
     }
 
