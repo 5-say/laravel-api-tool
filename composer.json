@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "\\": "src/",
+            "FiveSay\\": "src/",
             "Ext\\": "../../../ext/"
         }
     }
