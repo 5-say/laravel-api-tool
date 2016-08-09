@@ -1,6 +1,6 @@
 <?php
 
-namespace FiveSay\Laravel\Api\Controller\Pivot;
+namespace Ext\Controller\Pivot;
 
 use Ext\Controller\Module\Home as ModuleController;
 use FiveSay\Laravel\Api\Controller\PivotTrait;

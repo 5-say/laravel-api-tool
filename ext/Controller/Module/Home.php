@@ -1,7 +1,7 @@
 <?php
 
-namespace FiveSay\Laravel\Api\Controller\Module;
+namespace Ext\Controller\Module;
 
-use Ext\Controller\BaseController;
+use FiveSay\Laravel\Api\Controller\BaseController;
 
 class Home extends BaseController {}

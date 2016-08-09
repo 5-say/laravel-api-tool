@@ -122,7 +122,7 @@ if (! function_exists('dd_')) {
 if (! function_exists('logs')) {
     function logs()
     {
-        $file = '../storage/logs/debug.log';
+        $file = storage_path('logs/debug.log');
         $dir  = dirname($file);
         is_dir($dir) OR mkdir($dir, 0777, true);
 
@@ -137,67 +137,6 @@ if (! function_exists('logs')) {
 
         // 写入日志
         file_put_contents($file, $content, FILE_APPEND);
-    }
-}
-
-if (! function_exists('env')) {
-    /**
-     * Gets the value of an environment variable. Supports boolean, empty and null.
-     *
-     * @param  string  $key
-     * @param  mixed   $default
-     * @return mixed
-     */
-    function env($key, $default = null)
-    {
-        $value = getenv($key);
-
-        // 修正密集异步请求下 env 配置丢失的问题。
-        // http://stackoverflow.com/questions/31295126/laravel-5-losing-sessions-and-env-configuration-values-in-ajax-intensive-applic
-
-        // getenv() might not work as expected, especially on Windows machines, see
-        // https://github.com/laravel/framework/pull/8187
-        // and
-        // https://github.com/vlucas/phpdotenv/issues/76
-
-        // getenv returns strict false on failure
-        if ($value === false) {
-            // try extracting from $_ENV or $_SERVER and give up finally
-            $value = array_key_exists($key, $_ENV) ? $_ENV[$key] :
-                (array_key_exists($key, $_SERVER) ? $_SERVER[$key] : false);
-        }
-        // 以上解决方案，在极端情况下仍有可能出错
-        // 建议采用 php artisan config:cache 生成配置缓存，以减少 env 调用。
-        // 缓存位置：/bootstrap/cache/config.php
-
-
-        if ($value === false) {
-            return value($default);
-        }
-
-        switch (strtolower($value)) {
-            case 'true':
-            case '(true)':
-                return true;
-
-            case 'false':
-            case '(false)':
-                return false;
-
-            case 'empty':
-            case '(empty)':
-                return '';
-
-            case 'null':
-            case '(null)':
-                return;
-        }
-
-        if (strlen($value) > 1 && Str::startsWith($value, '"') && Str::endsWith($value, '"')) {
-            return substr($value, 1, -1);
-        }
-
-        return $value;
     }
 }
 
