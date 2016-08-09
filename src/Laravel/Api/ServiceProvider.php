@@ -15,6 +15,17 @@ class ServiceProvider extends BaseServiceProvider
     protected $defer = false;
 
     /**
+     * Register the service provider.
+     * 在容器中注册绑定
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // 
+    }
+
+    /**
      * Boot the service provider.
      * 运行注册后的启动服务
      */
@@ -29,17 +40,19 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__.'/../../../ext' => base_path('ext'),
         ], 'ext');
+        
+        // 注册全局中间件
+        $this->registerMiddleware('FiveSay\Laravel\Api\Middleware\AccessControlAllowOrigin');
     }
 
     /**
-     * Register the service provider.
-     * 在容器中注册绑定
-     *
-     * @return void
+     * 注册全局中间件
+     * @param  string $middleware
      */
-    public function register()
+    protected function registerMiddleware($middleware)
     {
-        // 
+        $kernel = $this->app['Illuminate\Contracts\Http\Kernel'];
+        $kernel->pushMiddleware($middleware);
     }
 
 

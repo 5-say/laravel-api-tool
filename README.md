@@ -2,6 +2,13 @@
 自用 laravel api 辅助工具库
 
 
+从 composer 安装
+
+```
+composer require five-say/laravel-api-tool
+```
+
+
 在 `/api/config/app.php` 中注册服务提供者
 
 ```php
@@ -30,4 +37,20 @@ define('LARAVEL_START', microtime(true));
 
 // 核心函数定义，最高优先级
 require __DIR__.'/../ext/changeCoreHelpers.php';
+```
+
+
+在 `/api/app/Http/Kernel.php` 中添加路由中间件
+
+```php
+<?php
+
+    protected $routeMiddleware = [
+        ...
+        'module'   => \FiveSay\Laravel\Api\Middleware\ModuleMiddleware::class,
+        'jwt.auth' => \FiveSay\Laravel\Api\Middleware\JwtAuthMiddleware::class,
+        'jwt.both' => \FiveSay\Laravel\Api\Middleware\JwtBothMiddleware::class,
+        'api.auth' => \Ext\Middleware\ApiAuthMiddleware::class,
+
+    ];
 ```

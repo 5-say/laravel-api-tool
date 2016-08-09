@@ -15,11 +15,15 @@ class AccessControlAllowOrigin
      */
     public function handle($request, Closure $next)
     {
-        $response = $next($request);
+        $clientOrigin = $request->header('host');
+        $allowOrigin  = config('allowClientOrigin');
 
-        $response->headers->add([
-            'Access-Control-Allow-Origin' => '*', // 允许跨域 api 调用
-        ]);
+        if (in_array($clientOrigin, $allowOrigin)) {
+            $response = $next($request);
+            $response->headers->add([
+                'Access-Control-Allow-Origin' => $clientOrigin, // 允许跨域 api 调用
+            ]);
+        }
 
         return $response;
     }

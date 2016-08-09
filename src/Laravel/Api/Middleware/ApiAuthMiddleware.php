@@ -6,7 +6,7 @@ use Closure;
 use FiveSay\Laravel\Api\Exception\DataAuthException;
 use Route;
 
-class DataAuthMiddleware
+class ApiAuthMiddleware
 {
     /**
      * Handle an incoming request.

@@ -1,17 +1,17 @@
 <?php
 
-namespace FiveSay\Laravel\Middleware;
+namespace Ext\Middleware;
 
-use FiveSay\Laravel\Api\Middleware\DataAuthMiddleware as BaseDataAuthMiddleware;
+use FiveSay\Laravel\Api\Middleware\ApiAuthMiddleware as BaseApiAuthMiddleware;
 use FiveSay\Laravel\Api\Exception\DataAuthException;
 use AdminAuthority;
 
-class DataAuthMiddleware extends BaseDataAuthMiddleware
+class ApiAuthMiddleware extends BaseApiAuthMiddleware
 {
     /**
      * admin模块 校验当前用户是否具有路由访问权限
      * @param  string $currentRouteName 当前路由名称
-     * @throws Ext\Exception\DataAuthException
+     * @throws FiveSay\Laravel\Api\Exception\DataAuthException
      */
     protected function adminModuleHasDataAuth($currentRouteName)
     {

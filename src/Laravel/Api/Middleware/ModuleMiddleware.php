@@ -7,32 +7,16 @@ use Closure;
 class ModuleMiddleware
 {
     /**
-     * 模块名称
-     * @var string
-     */
-    protected $moduleName;
-
-    /**
-     * 初始化
-     * @param string $moduleName 模块名称（英文小写，例如：home）
-     */
-    public function __construct($moduleName)
-    {
-        $this->moduleName = $moduleName;
-    }
-
-    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  int  $maxAttempts
-     * @param  int  $decayMinutes
+     * @param  \Closure                  $next
+     * @param  string                    $moduleName 模块名称
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $moduleName)
     {
-        putenv('MODULE_NAME='.$this->moduleName);
+        putenv('MODULE_NAME='.$moduleName);
         return $next($request);
     }
 
