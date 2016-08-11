@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth\Account;
 
 use Ext\Controller\Pivot\Admin as PivotController;
-use Account as ParentModel;
+use AdminAccount as ParentModel;
 
 /**
  * 多对多关联操作 => 职务&&权限

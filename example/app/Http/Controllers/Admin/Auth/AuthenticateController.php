@@ -16,6 +16,6 @@ class AuthenticateController extends Controller
     /**
      * 账户模型名称
      */
-    const AccountModel = 'AccountModelName';
+    const AccountModel = 'AdminAccount';
 
 }

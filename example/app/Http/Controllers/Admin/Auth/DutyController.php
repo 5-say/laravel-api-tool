@@ -16,12 +16,12 @@ class DutyController extends Controller
     /**
      * 资源模型名称
      */
-    const ThisModel = 'DutyModelName';
+    const ThisModel = 'AdminDuty';
 
     /**
      * 账号模型名称
      */
-    const AccountModel = 'AccountModelName';
+    const AccountModel = 'AdminAccount';
     
 
 }

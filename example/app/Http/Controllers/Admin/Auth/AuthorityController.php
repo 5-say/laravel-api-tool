@@ -21,7 +21,7 @@ class AuthorityController extends Controller
     /**
      * 职务模型名称
      */
-    const DutyModel = 'DutyModelName';
+    const DutyModel = 'AdminDuty';
     
 
 }
