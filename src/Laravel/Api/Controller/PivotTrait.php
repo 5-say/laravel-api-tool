@@ -14,8 +14,8 @@ trait PivotTrait
     //  * 外键
     //  * @var string
     //  */
-    // protected $foreignKey;
-    // protected $otherKey;
+    // protected $foreignKey = '';
+    // protected $otherKey   = '';
 
     /**
      * 获取关联对象

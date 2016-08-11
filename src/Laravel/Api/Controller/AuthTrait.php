@@ -17,15 +17,34 @@ trait AuthTrait
     // /**
     //  * 账户模型名称
     //  */
-    // const ThisModel = 'thisAuthUserModelName';
+    // const AccountModel = 'AccountModelName';
     
     /**
      * 获取当前账户模型实例
      */
-    static function ThisModel()
+    static function AccountModel()
     {
-        $thisModelName = self::ThisModel;
-        return new $thisModelName;
+        $Model = self::AccountModel;
+        return new $Model;
+    }
+
+    /**
+     * 获取表单认证信息
+     * @return mixed
+     */
+    protected function getCredentials()
+    {
+        $account = request('account');
+        return ['account' => $account];
+    }
+
+    /**
+     * 获取表单密码
+     * @return mixed
+     */
+    protected function getFormPassword()
+    {
+        return request('password');
     }
 
     /**
@@ -35,11 +54,11 @@ trait AuthTrait
     {
         try {
             // 从请求中获取凭证数据
-            $credentials['account'] = request('account');
-            $password               = request('password');
+            $credentials = $this->getCredentials();
+            $password    = $this->getFormPassword();
             
             // 查找用户
-            $authUser = self::ThisModel()->where($credentials)->firstOrFail();
+            $authUser = self::AccountModel()->where($credentials)->firstOrFail();
 
             // 验证密码
             $authUser->checkPassword($password);

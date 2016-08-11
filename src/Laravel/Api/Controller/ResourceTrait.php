@@ -11,15 +11,15 @@ trait ResourceTrait
     // /**
     //  * 资源模型名称
     //  */
-    // const ThisModel = 'thisResourceModelName';
+    // const ThisModel = 'ThisResourceModelName';
     
     /**
      * 获取当前资源模型实例
      */
     static function ThisModel()
     {
-        $thisModelName = self::ThisModel;
-        return new $thisModelName;
+        $Model = self::ThisModel;
+        return new $Model;
     }
 
     /**

@@ -2,7 +2,10 @@
 
 
 // 开放访问
-Route::group([], function () {});
+Route::group([], function () {
+    // 登录
+    Route::post('login', 'AuthenticateController@login');
+});
 
 
 // 登录可用
