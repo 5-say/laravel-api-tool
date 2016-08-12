@@ -11,22 +11,15 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 /**
  * 特性：认证控制器
  */
-trait AuthTrait
+trait AccountTrait
 {
+    use ResourceTrait;
+
     // 请在控制器中补充定义
     // /**
-    //  * 账户模型名称
+    //  * 资源模型名称
     //  */
-    // const AccountModel = 'AccountModelName';
-    
-    /**
-     * 获取当前账户模型实例
-     */
-    static function AccountModel()
-    {
-        $Model = self::AccountModel;
-        return new $Model;
-    }
+    // const ThisModel = 'AccountModelName';
 
     /**
      * 获取表单认证信息
@@ -58,7 +51,7 @@ trait AuthTrait
             $password    = $this->getFormPassword();
             
             // 查找用户
-            $authUser = self::AccountModel()->where($credentials)->firstOrFail();
+            $authUser = self::ThisModel()->where($credentials)->firstOrFail();
 
             // 验证密码
             $authUser->checkPassword($password);

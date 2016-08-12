@@ -90,5 +90,15 @@ class AdminAccount extends Model
         //     $hashed = Hash::make('plain-text');
         // }
     }
+
+    /**
+     * 密码加密
+     * @param  string $password 明文密码
+     * @return string 加密后的密码
+     */
+    public static function encryption($password)
+    {
+        return Hash::make($password);
+    }
     
 }
