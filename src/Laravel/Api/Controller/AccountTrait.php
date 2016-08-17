@@ -2,7 +2,7 @@
 
 namespace FiveSay\Laravel\Api\Controller;
 
-use JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 use FiveSay\Laravel\Api\Exception\CheckPasswordFail;

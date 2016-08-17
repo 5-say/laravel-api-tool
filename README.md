@@ -5,13 +5,14 @@
 从 composer 安装
 
 ```
+// 安装
 composer require five-say/laravel-api-tool -vv
-// or
+// 更新
 composer update five-say/laravel-api-tool -vv
 ```
 
 
-在 `/api/config/app.php` 中注册服务提供者，配置 `JWTFactory` 别名
+在 `/api/config/app.php` 中注册服务提供者
 
 ```php
 <?php
@@ -19,11 +20,6 @@ composer update five-say/laravel-api-tool -vv
     'providers' => [
         ...
         FiveSay\Laravel\Api\ServiceProvider::class,
-    ],
-
-    'aliases' => [
-        ...
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
     ],
 ```
 

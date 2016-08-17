@@ -4,7 +4,7 @@ namespace FiveSay\Laravel\Api\Middleware;
 
 use Closure;
 
-use JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
