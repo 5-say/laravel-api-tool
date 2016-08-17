@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use FiveSay\Laravel\Api\Model\BaseTrait as ExtTrait;
+use FiveSay\Laravel\Api\Exception\CheckPasswordFail;
 
 /**
  * 账号

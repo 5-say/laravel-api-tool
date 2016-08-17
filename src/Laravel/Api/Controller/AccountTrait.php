@@ -5,7 +5,7 @@ namespace FiveSay\Laravel\Api\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-use Ext\Exception\CheckPasswordFail;
+use FiveSay\Laravel\Api\Exception\CheckPasswordFail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**

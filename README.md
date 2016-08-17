@@ -11,7 +11,7 @@ composer update five-say/laravel-api-tool -vv
 ```
 
 
-在 `/api/config/app.php` 中注册服务提供者
+在 `/api/config/app.php` 中注册服务提供者，配置 `JWTFactory` 别名
 
 ```php
 <?php
@@ -19,6 +19,11 @@ composer update five-say/laravel-api-tool -vv
     'providers' => [
         ...
         FiveSay\Laravel\Api\ServiceProvider::class,
+    ],
+
+    'aliases' => [
+        ...
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
     ],
 ```
 
@@ -55,4 +60,21 @@ require __DIR__.'/../ext/changeCoreHelpers.php';
         'api.auth' => \Ext\Middleware\ApiAuthMiddleware::class,
 
     ];
+```
+
+
+修改 `/api/app/Providers/RouteServiceProvider.php` 中的全局路由中间件设置
+
+```php
+<?php
+
+    protected function mapWebRoutes(Router $router)
+    {
+        $router->group([
+            // 'namespace' => $this->namespace, 'middleware' => 'web',
+            'namespace' => $this->namespace, 'middleware' => 'api',
+        ], function ($router) {
+            require app_path('Http/routes.php');
+        });
+    }
 ```
