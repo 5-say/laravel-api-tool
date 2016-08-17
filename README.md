@@ -5,7 +5,9 @@
 从 composer 安装
 
 ```
-composer require five-say/laravel-api-tool
+composer require five-say/laravel-api-tool -vv
+// or
+composer update five-say/laravel-api-tool -vv
 ```
 
 
