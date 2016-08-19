@@ -103,14 +103,28 @@ trait ResourceTrait
     public function update($id)
     {
         $data  = request()->except('id');
+
         $model = self::ThisModel()->find($id);
-        // if(!request('last_logged_at')){
-        //     $data['last_logged_at'] = date('y-m-d h:i:s',time());
-        // }
+
+        // 更新过程补充
+        $result = $this->updating($data, $model);
+        if ($result) return $result;
+
         $model->fill($data)->save();
 
         return $model;
     }
+
+    /**
+     * 更新过程补充
+     * 注意：当存在返回值时，此返回值将被作为响应直接返回给客户端
+     * 
+     * @param  array  $data  需要更新的数据
+     * @param  object $model 需要更新的模型实例
+     * @return void|mixed
+     */
+    protected function updating(& $data, $model)
+    {}
 
     /**
      * 删除

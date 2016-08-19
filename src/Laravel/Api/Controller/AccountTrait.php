@@ -57,11 +57,11 @@ trait AccountTrait
             $authUser->checkPassword($password);
 
             // 验证通过则生成 token
-            $token        = JWTAuth::fromUser($authUser, $customClaims);
             $customClaims = [
                 'modelName'  => get_class($authUser),
                 'moduleName' => env('MODULE_NAME'),
             ];
+            $token        = JWTAuth::fromUser($authUser, $customClaims);
 
             return response()->json(compact('token'));
         } catch (ModelNotFoundException $e) {
@@ -80,6 +80,31 @@ trait AccountTrait
     public function myself()
     {
         return $this->authUser;
+    }
+
+    /**
+     * 更新过程补充
+     * 注意：当存在返回值时，此返回值将被作为响应直接返回给客户端
+     * 
+     * @param  array  $data  需要更新的数据
+     * @param  object $model 需要更新的模型实例
+     * @return void|mixed
+     */
+    protected function updating(& $data, $model)
+    {
+        unset($data['password']);
+    }
+
+    /**
+     * 修改密码
+     * @param  integer $id 主键
+     */
+    public function changePassword($id)
+    {
+        $password = $this->getFormPassword();
+        $model    = self::ThisModel()->find($id);
+        $model->changePassword($password);
+        return $model;
     }
 
 

@@ -16,7 +16,7 @@ class AuthorityController extends Controller
     /**
      * 资源模型名称
      */
-    const ThisModel = 'Authority';
+    const ThisModel = 'AdminAuthority';
 
     /**
      * 职务模型名称

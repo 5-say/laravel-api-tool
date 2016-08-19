@@ -11,6 +11,7 @@
     "require": {
         "illuminate/support": "5.1.*|5.2.*|5.3.*",
         "five-say/laravel-model-ext-trait": "^1.0",
+        "jenssegers/agent": "^2.3",
         "tymon/jwt-auth": "0.5.*"
     },
     "autoload": {

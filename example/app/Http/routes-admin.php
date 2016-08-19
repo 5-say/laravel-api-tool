@@ -28,7 +28,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get(      'account/myself' , 'AccountController@myself' );
 
 
-    Route::group(['middleware' => ['jwt.auth', 'data.auth']], function () {
+    Route::group(['middleware' => ['jwt.auth', 'api.auth']], function () {
 
 
         // 职务
