@@ -17,7 +17,8 @@ class AdminAccount extends Model
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password',
+        'is_super_account',
     ];
 
     /**
@@ -25,17 +26,22 @@ class AdminAccount extends Model
      * @var array
      */
     public $rules = [
-        'name' => [
-            'required' => '请填写用户名',
+        'is_super_account' => [
+            'read_only'             => '',
+        ],
+        'account' => [
+            'required'              => '请填写用户名',
+            'unique:admin_accounts' => '用户名已被占用',
         ],
         'password' => [
-            'between:6,30' => '密码长度请保持在 :min 到 :max 之间',
+            'read_only'             => '',
+            'between:6,30'          => '密码长度请控制在 :min 到 :max 之间',
         ],
-        'email' => [
-            'required'      => '请填写 email',
-            'email'         => 'email 格式不正确',
-            'unique:admins' => 'email 已被占用',
-        ],
+        // 'email' => [
+        //     'required'              => '请填写 email',
+        //     'email'                 => 'email 格式不正确',
+        //     'unique:admin_accounts' => 'email 已被占用',
+        // ],
     ];
 
     /**
@@ -104,7 +110,16 @@ class AdminAccount extends Model
     public function setDutiesIdAttribute($value)
     {
         $dutiesId = is_array($value) ? $value: [$value];
-        $this->duties()->sync($dutiesId);
+
+        if ($this->id) {
+            $this->duties()->sync($dutiesId);
+        }
+        // 首次创建无ID，无法进行关联定义，注册事件延后处理
+        else {
+            static::registerModelEvent('created', function ($model) use ($dutiesId) {
+                $model->duties()->sync($dutiesId);
+            });
+        }
     }
 
     /**
@@ -174,6 +189,8 @@ class AdminAccount extends Model
      */
     public function changePassword($password)
     {
+        // 移除只读限制
+        $this->removeRule('password.read_only', 'updating');
         $this->fill(['password' => $password])->save();
         return $this;
     }

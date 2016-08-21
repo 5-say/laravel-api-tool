@@ -19,28 +19,30 @@ Route::group(['middleware' => 'jwt.both'], function () {});
  */
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
-
-    // 账号
-    Route::resource( 'account'        , 'AccountController'        );
     // 登录
-    Route::post(     'login'          , 'AccountController@login'  );
-    // 获取当前登录的用户信息
-    Route::get(      'account/myself' , 'AccountController@myself' );
+    Route::post('login', 'AccountController@login');
 
 
     Route::group(['middleware' => ['jwt.auth', 'api.auth']], function () {
 
+        // 账号
+        Route::resource( 'account'                       , 'AccountController'                  );
+        // 获取当前登录的用户信息
+        Route::get(      'account/myself'                , 'AccountController@myself'           );
+        // 修改指定用户密码
+        Route::put(      'account/{account_id}/password' , 'AccountController@changePassword'   );
+
 
         // 职务
-        Route::resource( 'duty'                      , 'DutyController'                  );
+        Route::resource( 'duty'                          , 'DutyController'                     );
         // 获取指定账户拥有的职务列表
-        Route::get(      'account/{account_id}/duty' , 'DutyController@indexByAccountId' );
+        Route::get(      'account/{account_id}/duty'     , 'DutyController@indexByAccountId'    );
 
 
         // 获取当前账户拥有的权限列表
-        Route::get( 'authority/myself'         , 'AuthorityController@indexForMyself' );
+        Route::get(      'authority/myself'              , 'AuthorityController@indexForMyself' );
         // 获取指定职务拥有的权限列表
-        Route::get( 'duty/{duty_id}/authority' , 'AuthorityController@indexByDutyId'  );
+        Route::get(      'duty/{duty_id}/authority'      , 'AuthorityController@indexByDutyId'  );
 
 
         // 多对多关联操作 => 职务 && 权限

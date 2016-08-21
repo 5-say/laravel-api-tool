@@ -3,6 +3,7 @@
 namespace FiveSay\Laravel\Api;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Validator;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -43,6 +44,9 @@ class ServiceProvider extends BaseServiceProvider
         
         // 注册全局中间件
         $this->registerMiddleware('FiveSay\Laravel\Api\Middleware\AccessControlAllowOrigin');
+
+        // 注册自定义验证规则
+        $this->registerCustomValidate();
     }
 
     /**
@@ -53,6 +57,21 @@ class ServiceProvider extends BaseServiceProvider
     {
         $kernel = $this->app['Illuminate\Contracts\Http\Kernel'];
         $kernel->pushMiddleware($middleware);
+    }
+
+    /**
+     * 注册自定义验证规则
+     */
+    protected function registerCustomValidate()
+    {
+        // 让模型支持只读字段的定义
+        Validator::extend('read_only', function($attribute, $value, $parameters, $validator) {
+            return is_null($value);
+        });
+        Validator::replacer('read_only', function($message, $attribute, $rule, $parameters) {
+            $message = $message ?: '只读字段，禁止赋值';
+            return $message;
+        });
     }
 
 

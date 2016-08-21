@@ -68,23 +68,25 @@ trait ResourceTrait
      */
     public function store()
     {
-        $data = request()->all();
+        $data  = request()->all();
+        $model = self::ThisModel();
 
         // 存储过程补充
-        $result = $this->storing($data);
+        $result = $this->storing($data, $model);
         if ($result) return $result;
         
-        return self::ThisModel()->forceCreate($data);
+        return $model->forceCreate($data);
     }
 
     /**
      * 存储过程补充
      * 注意：当存在返回值时，此返回值将被作为响应直接返回给客户端
      * 
-     * @param  array $data 需要存储的数据
+     * @param  array  $data  需要存储的数据
+     * @param  object $model 需要调用的模型实例
      * @return void|mixed
      */
-    protected function storing(& $data)
+    protected function storing(& $data, & $model)
     {}
 
     /**
@@ -103,16 +105,13 @@ trait ResourceTrait
     public function update($id)
     {
         $data  = request()->except('id');
-
         $model = self::ThisModel()->find($id);
 
         // 更新过程补充
         $result = $this->updating($data, $model);
         if ($result) return $result;
 
-        $model->fill($data)->save();
-
-        return $model;
+        return $model->update($data);
     }
 
     /**
@@ -123,7 +122,7 @@ trait ResourceTrait
      * @param  object $model 需要更新的模型实例
      * @return void|mixed
      */
-    protected function updating(& $data, $model)
+    protected function updating(& $data, & $model)
     {}
 
     /**

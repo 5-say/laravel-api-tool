@@ -83,16 +83,17 @@ trait AccountTrait
     }
 
     /**
-     * 更新过程补充
+     * 存储过程补充
      * 注意：当存在返回值时，此返回值将被作为响应直接返回给客户端
      * 
-     * @param  array  $data  需要更新的数据
-     * @param  object $model 需要更新的模型实例
+     * @param  array  $data  需要存储的数据
+     * @param  object $model 需要调用的模型实例
      * @return void|mixed
      */
-    protected function updating(& $data, $model)
+    protected function storing(& $data, & $model)
     {
-        unset($data['password']);
+        // 移除只读限制
+        $model->removeRule('password.read_only', 'creating');
     }
 
     /**
@@ -105,6 +106,22 @@ trait AccountTrait
         $model    = self::ThisModel()->find($id);
         $model->changePassword($password);
         return $model;
+    }
+
+    /**
+     * 删除
+     * @param  integer $id 主键
+     */
+    public function destroy($id)
+    {
+        switch (true) {
+            case $id == $this->authUserId:
+                return response()->json(['error' => '禁止删除自己的账号'], 400);
+            case $this->authUser->isSuperUser($id):
+                return response()->json(['error' => '禁止删除超级管理员的账号'], 400);
+        }
+        return 0;
+        return self::ThisModel()->where('id', $id)->firstOrFail()->delete() ? 1: 0; 
     }
 
 
