@@ -24,8 +24,10 @@ class Response extends ResponseFactory
 
         // IE9 flash 图片上传只能获取 200 状态码
         if (request('is-flash')) {
-            $data['status'] = $status;
-            $response = new JsonResponse($data, 200, $headers, $options);
+            $response = new JsonResponse([
+                'status' => $status,
+                'data'   => $data,
+            ], 200, $headers, $options);
         }
         else {
             $response = new JsonResponse($data, $status, $headers, $options);

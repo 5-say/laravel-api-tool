@@ -2,7 +2,9 @@
 
 
 // 开放访问
-Route::group([], function () {});
+Route::group([], function () {
+    Route::post('demo', 'Auth\AccountController@aaa');
+});
 
 
 // 登录可用

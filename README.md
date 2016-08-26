@@ -20,7 +20,6 @@ composer update five-say/laravel-api-tool -vv
     'providers' => [
         ...
         FiveSay\Laravel\Api\ServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     ],
 ```
 
